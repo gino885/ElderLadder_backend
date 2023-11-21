@@ -8,12 +8,12 @@ import java.util.Set;
 public class ImageProcessingUtility {
 
     public static BufferedImage addToImage(BufferedImage originalImage,
-                                           Map<String, String> task,
-                                           BufferedImage IT_seed)
+                                           String title,
+                                           String description,
+                                           BufferedImage IT_seed,
+                                           BufferedImage dallePicture)
     {
-        Map.Entry<String, String> entry = task.entrySet().iterator().next();
-        String title = entry.getKey();
-        String description = entry.getValue();
+
         Graphics2D g2d = originalImage.createGraphics();
         g2d.setFont(new Font("Microsoft YaHei", Font.PLAIN, 12));
         g2d.setColor(Color.BLACK);
@@ -47,6 +47,10 @@ public class ImageProcessingUtility {
         int IT_leftMargin = (int)(ITcm / 2.54 * dpi);
         int IT_topMargin = (int)(ITcm2 / 2.54 * dpi);
         g2d.drawImage(IT_seed, IT_leftMargin, IT_topMargin, null);
+
+        double DLcm = 1.2;
+        int DL_topMargin = (int)(DLcm / 2.54 * dpi);
+        g2d.drawImage(dallePicture, D_leftMargin, DL_topMargin, null);
 
         g2d.dispose();
 

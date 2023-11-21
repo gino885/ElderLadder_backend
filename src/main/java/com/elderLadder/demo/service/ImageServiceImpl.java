@@ -1,5 +1,6 @@
 package com.elderLadder.demo.service;
 
+import com.elderLadder.demo.util.DalleClient;
 import com.elderLadder.demo.util.ImageProcessingUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -16,7 +17,7 @@ import java.util.*;
 
 @Component
 public class ImageServiceImpl implements ImageService{
-
+    DalleClient dalleClient =new DalleClient();
     private final ResourceLoader resourceLoader;
     @Autowired
     public ImageServiceImpl(ResourceLoader resourceLoader) {
@@ -40,9 +41,14 @@ public class ImageServiceImpl implements ImageService{
         BufferedImage originalImage = ImageIO.read(card.getInputStream());
         Resource seed = resourceLoader.getResource("classpath:static/IT_seed.png");
         BufferedImage IT_seed = ImageIO.read(seed.getInputStream());
+        Map.Entry<String, String> entry = task.entrySet().iterator().next();
+        String title = entry.getKey();
+        String description = entry.getValue();
+        String prompt = description + "並專注於溫暖且和諧的青年與長者互動";
+        BufferedImage dallePicture = dalleClient.generateImage(prompt);
 
         // Add text to the image
-        BufferedImage imageWithText = ImageProcessingUtility.addToImage(originalImage, task, IT_seed);
+        BufferedImage imageWithText = ImageProcessingUtility.addToImage(originalImage, title, description, IT_seed, dallePicture);
 
         // Convert the BufferedImage to a byte array
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

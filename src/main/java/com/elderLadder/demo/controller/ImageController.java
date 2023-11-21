@@ -1,6 +1,5 @@
 package com.elderLadder.demo.controller;
 
-import com.elderLadder.demo.service.DalleService;
 import com.elderLadder.demo.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -19,11 +17,9 @@ public class ImageController {
 
     @Autowired
     private ImageService imageService;
-    @Autowired
-    private DalleService dalleService;
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/image")
-    public ResponseEntity<String> generateImageWithText() {
+    public ResponseEntity<byte[]> generateImageWithText() {
         try {
             Map<String, String> task = imageService.getRandomText();
             byte[] imageData = imageService.generateImageWithText(task);
@@ -34,7 +30,7 @@ public class ImageController {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.IMAGE_JPEG);
             headers.set("Content-Encoding", "UTF-8");
-            return new ResponseEntity<>(dalleService.getImageUrl("your mon"), headers, HttpStatus.OK);
+            return new ResponseEntity<>(imageData, headers, HttpStatus.OK);
         } catch (Exception e) {
             // Log the exception for debugging
             Logger logger = LoggerFactory.getLogger(ImageController.class);
