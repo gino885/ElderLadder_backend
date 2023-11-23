@@ -25,8 +25,17 @@ public class ImageServiceImpl implements ImageService{
     }
         public Map<String, String> getRandomText() {
             Map<String,String> tasks = new HashMap<String,String>();
-            tasks.put("休閒娛樂", "請打通電話，跟爺爺奶奶聊\n聊最近空閒時做了甚麼來享\n受這段休閒時間？");
-            tasks.put("學校", "打電話或傳訊息和長輩分享\n最近學校發生了什麼趣事");
+            tasks.put("休閒娛樂 A", "請打通電話，跟爺爺奶奶聊\n聊最近空閒時做了甚麼來享\n受這段休閒時間？");
+            tasks.put("休閒娛樂 B", "致電給長輩，詢問他們是否\n願意一同觀賞一部有趣的\n電影或參與社區出遊的活動\n");
+            tasks.put("學校 A", "打電話或傳訊息和長輩分享\n最近學校發生了什麼趣事");
+            tasks.put("學校 B", "致電給長輩，分享自己在學\n校的一個有趣事件或成就也\n鼓勵他們分享自己學生時代\n的趣事，促進跨世代的對話。");
+            tasks.put("家庭 A", "打通電話，和爺奶聊聊\n「組成家庭」對他們來說的\n意義為何？");
+            tasks.put("家庭 B", "打給長輩表達你對於上次\n過年的美好回憶，並提議\n下次的年夜飯計劃");
+            tasks.put("工作 A", "打電話、傳訊息或視訊跟長\n輩分享工作上發生的事並引\n導長輩給予建議或分享看法");
+            tasks.put("工作 B", "致電長輩，詢問他們對於當今\n工作環境的看法，同時分享\n一些你自己的工作經歷，可以\n是實習或是打工");
+            tasks.put("技藝 A", "打給長輩，分享你最近學到\n了甚麼、詢問長輩會唱的\n一首歌或會做的一道菜");
+            tasks.put("生活 A", "致電長輩，跟他們分享生活\n中遇到的瓶頸，並請他們\n分享一些看法");
+            tasks.put("生活 B", "致電長輩，先詢問最近\n有沒有看什麼劇，再問他們\n劇情跟最喜歡的角色");
             Random generator = new Random();
             Object[] keys = tasks.keySet().toArray();
             String randomKey =(String) keys[generator.nextInt(keys.length)];
