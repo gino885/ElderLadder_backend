@@ -2,6 +2,7 @@ package com.elderLadder.demo.service;
 
 import com.elderLadder.demo.util.DalleClient;
 import com.elderLadder.demo.util.ImageProcessingUtility;
+import com.elderLadder.demo.util.S3ImageLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -18,6 +19,7 @@ import java.util.*;
 @Component
 public class ImageServiceImpl implements ImageService{
     DalleClient dalleClient =new DalleClient();
+    S3ImageLoader imageLoader = new S3ImageLoader();
     private final ResourceLoader resourceLoader;
     @Autowired
     public ImageServiceImpl(ResourceLoader resourceLoader) {
@@ -32,7 +34,7 @@ public class ImageServiceImpl implements ImageService{
             tasks.put("家庭 A", "打通電話，和爺奶聊聊\n「組成家庭」對他們來說的\n意義為何？");
             tasks.put("家庭 B", "打給長輩表達你對於上次\n過年的美好回憶，並提議\n下次的年夜飯計劃");
             tasks.put("工作 A", "打電話、傳訊息或視訊跟長\n輩分享工作上發生的事並引\n導長輩給予建議或分享看法");
-            tasks.put("工作 B", "致電長輩，詢問他們對於當今\n工作環境的看法，同時分享\n一些你自己的工作經歷，可以\n是實習或是打工");
+            tasks.put("工作 B", "致電長輩，詢問他們對於\n當今工作環境的看法，同時\n分享一些你自己的工作經歷");
             tasks.put("技藝 A", "打給長輩，分享你最近學到\n了甚麼、詢問長輩會唱的\n一首歌或會做的一道菜");
             tasks.put("生活 A", "致電長輩，跟他們分享生活\n中遇到的瓶頸，並請他們\n分享一些看法");
             tasks.put("生活 B", "致電長輩，先詢問最近\n有沒有看什麼劇，再問他們\n劇情跟最喜歡的角色");
@@ -45,11 +47,9 @@ public class ImageServiceImpl implements ImageService{
         }
 
     public byte[] generateImageWithText(Map<String, String> task) throws IOException {
-        // Load the image from the classpath
-        Resource card = resourceLoader.getResource("classpath:static/card.jpg");
-        BufferedImage originalImage = ImageIO.read(card.getInputStream());
-        Resource seed = resourceLoader.getResource("classpath:static/IT_seed.png");
-        BufferedImage IT_seed = ImageIO.read(seed.getInputStream());
+
+        BufferedImage originalImage = imageLoader.loadImageFromS3("https://elasticbeanstalk-ap-southeast-2-617849466687.s3.ap-southeast-2.amazonaws.com/images/card.jpg");
+        BufferedImage IT_seed = imageLoader.loadImageFromS3("https://elasticbeanstalk-ap-southeast-2-617849466687.s3.ap-southeast-2.amazonaws.com/images/IT_seed.png");
         Map.Entry<String, String> entry = task.entrySet().iterator().next();
         String title = entry.getKey();
         String description = entry.getValue();
