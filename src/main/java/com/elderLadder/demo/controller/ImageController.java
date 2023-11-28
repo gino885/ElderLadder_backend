@@ -17,7 +17,7 @@ public class ImageController {
 
     @Autowired
     private ImageService imageService;
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "https://web-frontend.d3fhj1xxsur013.amplifyapp.com")
     @GetMapping("/image")
     public ResponseEntity<byte[]> generateImageWithText() {
         try {
@@ -29,7 +29,7 @@ public class ImageController {
             }
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.IMAGE_JPEG);
-            headers.set("Content-Encoding", "UTF-8");
+            headers.set("Content-Type", "image/jpeg; charset=UTF-8");
             return new ResponseEntity<>(imageData, headers, HttpStatus.OK);
         } catch (Exception e) {
             // Log the exception for debugging
