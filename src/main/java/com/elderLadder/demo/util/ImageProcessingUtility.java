@@ -15,8 +15,9 @@ public class ImageProcessingUtility {
     {
 
         Graphics2D g2d = originalImage.createGraphics();
-        g2d.setFont(new Font("Microsoft YaHei", Font.PLAIN, 12));
         g2d.setColor(Color.BLACK);
+        Font font = new Font("Source Han Sans", Font.PLAIN, 12);
+        g2d.setFont(font);
 
         int dpi = 96;
         double Dcm = 0.42; // The margin in centimeters

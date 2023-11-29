@@ -28,8 +28,8 @@ public class ImageController {
                 throw new RuntimeException("Image data is null or empty");
             }
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.IMAGE_JPEG);
-            headers.set("Content-Type", "image/jpeg; charset=UTF-8");
+            headers.setContentType(MediaType.IMAGE_PNG);
+            headers.set("Content-Type", "image/png; charset=UTF-8");
             return new ResponseEntity<>(imageData, headers, HttpStatus.OK);
         } catch (Exception e) {
             // Log the exception for debugging
@@ -37,5 +37,10 @@ public class ImageController {
             logger.error("Error generating image", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<String> home() {
+        return new ResponseEntity<>("Home Page", HttpStatus.OK);
     }
 }

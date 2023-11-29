@@ -63,7 +63,7 @@ public class ImageServiceImpl implements ImageService{
 
         // Convert the BufferedImage to a byte array
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.write(imageWithText, "jpg", baos);
+        ImageIO.write(imageWithText, "png", baos);
         return baos.toByteArray();
     }
 }
