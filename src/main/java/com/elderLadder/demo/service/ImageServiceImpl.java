@@ -41,10 +41,10 @@ public class ImageServiceImpl implements ImageService{
             easyTasks.put("工作 A", "與長輩分享工作或實習上發生的事，並引導長輩給予建議或分享看法");
 
             Map<String, String> mediumTasks = new HashMap<>();
-            mediumTasks.put("中等休閒娛樂 C", "詢問長輩是否願意一起共度休閒時光（如觀賞一部輕鬆有趣的影劇或品嚐點心");
-            mediumTasks.put("中等生活 B", "邀請長輩一起出門走走（如去附近的公園散步或是一起去市場買菜等");
-            mediumTasks.put("中等生活 C", "與長輩一起準備一份餐點");
-            mediumTasks.put("中等休閒娛樂 D", "與長輩一起下棋或玩遊戲");
+            mediumTasks.put("休閒娛樂 C", "詢問長輩是否願意一起共度休閒時光（如觀賞一部輕鬆有趣的影劇或品嚐點心");
+            mediumTasks.put("生活 B", "邀請長輩一起出門走走（如去附近的公園散步或是一起去市場買菜等");
+            mediumTasks.put("生活 C", "與長輩一起準備一份餐點");
+            mediumTasks.put("休閒娛樂 D", "與長輩一起下棋或玩遊戲");
 
             Map<String, String> hardTasks = new HashMap<>();
             hardTasks.put("生活 D", "關心長輩並表達你對於上次過年的美好回憶，並提議下次的年夜飯計劃");
@@ -64,14 +64,11 @@ public class ImageServiceImpl implements ImageService{
             } else if (taskDifficulty.contains("困難")) {
                 selectedTasks = hardTasks;
             } else {
-                selectedTasks = new HashMap<>();
+                selectedTasks = easyTasks;
             }
 
             // 从选中的任务组中随机选择一个任务
             Object[] keys = selectedTasks.keySet().toArray();
-            if (keys.length == 0) {
-                return new HashMap<>(); // 如果没有任务可选，返回空的Map
-            }
 
             String randomKey = (String) keys[generator.nextInt(keys.length)];
             Map<String, String> task = new HashMap<>();
