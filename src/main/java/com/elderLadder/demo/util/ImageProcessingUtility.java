@@ -16,7 +16,7 @@ public class ImageProcessingUtility {
 
         Graphics2D g2d = originalImage.createGraphics();
         g2d.setColor(Color.BLACK);
-        Font font = new Font("Source Han Sans", Font.PLAIN, 12);
+        Font font = new Font("Noto Sans CJK", Font.PLAIN, 12);
         g2d.setFont(font);
 
         int dpi = 96;

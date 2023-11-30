@@ -17,7 +17,7 @@ public class ImageController {
 
     @Autowired
     private ImageService imageService;
-    @CrossOrigin(origins = "https://web-frontend.d3fhj1xxsur013.amplifyapp.com")
+    @CrossOrigin(origins = "https://itseed.elderladder.live")
     @GetMapping("/image")
     public ResponseEntity<byte[]> generateImageWithText() {
         try {
